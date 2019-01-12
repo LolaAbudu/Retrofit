@@ -6,21 +6,21 @@ import java.util.List;
 
 public class Dogs {
 
-    private final String status;
-    private final List<String> message;
+    //private final String status;
+    private final String message;
 
 
-    public Dogs(String status, List<String> message){
-        this.status=status;
+    public Dogs( String message){
+//        this.status=status;
         this.message=message;
     }
 
-    public List<String> getMessage(){
+    public String getMessage(){
         return message;
     }
 
-    public String getStatus() {
-        return status;
-    }
+//    public String getStatus() {
+//        return status;
+//    }
 
 }

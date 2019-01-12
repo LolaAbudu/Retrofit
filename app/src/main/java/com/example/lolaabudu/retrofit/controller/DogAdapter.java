@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.lolaabudu.retrofit.R;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class DogAdapter extends RecyclerView.Adapter<DogViewHolder> {
     private List<Dogs> dogsList;
+    //private ImageView dogImageView;
 
     public DogAdapter (List<Dogs> dogsList){
         this.dogsList=dogsList;

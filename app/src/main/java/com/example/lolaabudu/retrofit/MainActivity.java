@@ -3,6 +3,7 @@ package com.example.lolaabudu.retrofit;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.lolaabudu.retrofit.controller.DogAdapter;
 import com.example.lolaabudu.retrofit.model.Dogs;
+import com.example.lolaabudu.retrofit.model.RandomDog;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView dogsViewRV;
 
     private static final String BASE_URL_DOG_CEO = "https://dog.ceo";
-    //private TextView dogTextView;
     private ImageView dogImageView;
 
     @Override
@@ -40,24 +41,32 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        final Retrofit retrofit = createRetrofit();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL_DOG_CEO)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         DogApi api = retrofit.create(DogApi.class);
-        Call<Dogs> dogCall = api.getDogs();
-        dogCall.enqueue(new Callback<Dogs>() {
+        Call<RandomDog> dogCall = api.getDogs();
+        dogCall.enqueue(new Callback<RandomDog>() {
             @Override
-            public void onResponse(Call<Dogs> call, Response<Dogs> response) {
-                Dogs responseDog = response.body();
-                Log.d("woohoo" ,"onResponse " + responseDog.getMessage());
+            public void onResponse(Call<RandomDog> call, Response<RandomDog> response) {
+                RandomDog responseDog = response.body();
+                Log.d("woohoo" ,"onResponse " + responseDog.getdogUrl());
 
-                for(String s: responseDog.getMessage()){
+                for(String s: responseDog.getdogUrl()){
                   allDogsList.add(new Dogs(s));
                 }
-                Picasso.get().load(responseDog.getMessage())
-                        .into(dogImageView);
+
+                DogAdapter dogAdapter = new DogAdapter(allDogsList);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+                dogsViewRV.setAdapter(dogAdapter);
+                dogsViewRV.setLayoutManager(linearLayoutManager);
+//                Picasso.get().load(responseDog.getMessage())
+//                        .into(dogImageView);
             }
 
             @Override
-            public void onFailure(Call<Dogs> call, Throwable t) {
+            public void onFailure(Call<RandomDog> call, Throwable t) {
 
             }
         });
