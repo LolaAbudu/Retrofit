@@ -6,12 +6,10 @@ import java.util.List;
 
 public class Dogs {
 
-    //private final String status;
-    private final String message;
+    private String message;
 
 
     public Dogs( String message){
-//        this.status=status;
         this.message=message;
     }
 
@@ -19,8 +17,8 @@ public class Dogs {
         return message;
     }
 
-//    public String getStatus() {
-//        return status;
-//    }
+    public void setMessage(String message) {
+        this.message=message;
+    }
 
 }

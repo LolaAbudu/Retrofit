@@ -21,12 +21,6 @@ public class DogViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void onBind(Dogs dogs) {
-//        status.setText(dogs.getStatus());
-//        String dogImages = dogs.getMessage();
-//        Picasso.get().load()
-        //Picasso.get().load(dogs).centerCrop().fit().into(dogImageView);
-        //dogImageView.setImageURI((Uri)dogs.getMessage());
-
-        Picasso.get(dogImageView.getContext()).load(dogs.getMessage()).into(dogImageView);
+        Picasso.get().load(dogs.getMessage()).into(dogImageView);
     }
 }

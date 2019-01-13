@@ -16,8 +16,8 @@ import java.util.List;
 
 
 public class DogAdapter extends RecyclerView.Adapter<DogViewHolder> {
+
     private List<Dogs> dogsList;
-    //private ImageView dogImageView;
 
     public DogAdapter (List<Dogs> dogsList){
         this.dogsList=dogsList;
