@@ -1,19 +1,14 @@
 package com.example.lolaabudu.retrofit;
 
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.lolaabudu.retrofit.controller.DogAdapter;
 import com.example.lolaabudu.retrofit.model.Dogs;
-import com.example.lolaabudu.retrofit.model.RandomDog;
-import com.squareup.picasso.Picasso;
+import com.example.lolaabudu.retrofit.model.ResponseDog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
         Retrofit retrofit = createRetrofit();
 
         DogApi api = retrofit.create(DogApi.class);
-        Call<RandomDog> dogCall = api.getDogs();
+        Call<ResponseDog> dogCall = api.getDogs();
 
-        dogCall.enqueue(new Callback<RandomDog>() {
+        dogCall.enqueue(new Callback<ResponseDog>() {
             @Override
-            public void onResponse(Call<RandomDog> call, Response<RandomDog> response) {
-                RandomDog responseDog = response.body();
+            public void onResponse(Call<ResponseDog> call, Response<ResponseDog> response) {
+                ResponseDog responseDog = response.body();
 
                 Log.d("woohoo" ,"onResponse2: " + responseDog.getdogUrl());
 
@@ -63,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<RandomDog> call, Throwable t) {
+            public void onFailure(Call<ResponseDog> call, Throwable t) {
                 Log.d("nooway", "onFailure" + "Failed");
             }
         });
